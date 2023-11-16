@@ -2,7 +2,7 @@ import express from 'express';
 import data from './data.js';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // Root route
 app.get('/', (req, res) => {
