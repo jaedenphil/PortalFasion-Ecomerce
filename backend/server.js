@@ -1,22 +1,20 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+import express from 'express';
+import data from './data.js';
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = 3000;
 
-app.get('/api/products', (req, res) => {
-  // Read product data from a file using fs and path modules
-  fs.readFile(path.join(__dirname, 'data.json'), 'utf8', (err, data) => {
-    if (err) {
-      res.status(500).send('Internal Server Error');
-      return;
-    }
-    const products = JSON.parse(data);
-    res.status(200).json(products);
-  });
+// Root route
+app.get('/', (req, res) => {
+  res.send('Server is running on http://localhost:' + port);
 });
 
+// Products route
+app.get('/api/products', (req, res) => {
+  res.json(data.products);
+});
+
+// Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log('Server is running on http://localhost:' + port);
 });
