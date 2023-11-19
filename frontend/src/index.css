@@ -12,11 +12,20 @@ body {
 main {
   flex: 1;
 }
+.btn-primary {
+  background-color: #00d5ff;
+  color: #000000;
+}
+
 .products {
   display: flex;
   /* flex-wrap: wrap; */
   justify-content: center;
 }
+.rating span {
+  color: #00d5ff;
+}
+
 .product {
   border: 1px #404040 solid;
   margin: 0.5rem;
@@ -28,4 +37,8 @@ main {
 }
 .product-info {
   padding: 1rem;
+}
+.img-large {
+  max-width: 500px;
+  min-height: 600px;
 }

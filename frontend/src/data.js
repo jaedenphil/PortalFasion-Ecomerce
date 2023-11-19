@@ -44,7 +44,7 @@ const data = {
       price: 35.99,
       countInStock: 10,
       brand: 'PortalFashion',
-      rating: 5,
+      rating: 2,
       numReviews: 4,
       description: 'Shanks Embroidarded T-Shirts: Red',
     },
