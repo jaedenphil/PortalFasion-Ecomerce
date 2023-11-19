@@ -7,3 +7,5 @@
 # node server has been created along with backend folder, can now fetch product data in frontend from backend.
 
 # bootstrap update: added react bootstrap package and react-router-bootstrap package. changed header to use Navbar from react bootstrap. changed index.css: deleted all style from header and main then replaced .site-container setting min-height to 100vh making a full height screen. then set flex to 1 in css for main. imported bootstrap css from bootstrap Finally removed use-reducer-logger as it was incompatible with react-bootstrap
+
+# used react's context api to create a centralized state management system for the app. the state is controlled by a reducer function, and a provider component wraps the application, giving access to the shared state. implemented a straightforward click handler for adding items to the shopping cart
