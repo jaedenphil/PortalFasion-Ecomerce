@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
         <header>
-          <Navbar bg="dark" variant="dark">
+          <Navbar bg="primary" variant="dark">
             <Container>
               <LinkContainer to="/">
                 <Navbar.Brand>PortalFashion</Navbar.Brand>
@@ -25,7 +25,7 @@ function App() {
                   Cart
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg="danger">
-                      {cart.cartItems.length}
+                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                     </Badge>
                   )}
                 </Link>

@@ -1,6 +1,7 @@
 const data = {
   products: [
     {
+      _id: '1',
       name: 'Zoro Hoodie',
       slug: 'Zoro-Sweater',
       category: 'Sweaters',
@@ -13,6 +14,7 @@ const data = {
       description: 'Wano Zoro Embroidarded Sweater: Two Tone Purple',
     },
     {
+      _id: '2',
       name: 'Marco Hoodie',
       slug: 'Marco-Sweater',
       category: 'Sweaters',
@@ -25,6 +27,7 @@ const data = {
       description: 'Marco Embroidarded Sweater: Light-Blue',
     },
     {
+      _id: '3',
       name: 'Trafalger Law Shirt',
       slug: 'Trafalger-Law-Sweater',
       category: 'T-Shirts',
@@ -37,6 +40,7 @@ const data = {
       description: 'Trafalger Law Embroidarded T-Shirt: Brown',
     },
     {
+      _id: '4',
       name: 'Shanks Law Shirt',
       slug: 'Shanks-T-Shirts',
       category: 'T-Shirts',
