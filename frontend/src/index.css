@@ -42,3 +42,6 @@ main {
   max-width: 500px;
   min-height: 600px;
 }
+.img-thumbnail {
+  height: 80px;
+}
