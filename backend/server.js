@@ -14,7 +14,7 @@ mongoose
   });
 const app = express();
 const port = 3001;
-
+app.use(express.static('public'));
 // Root route
 app.get('/', (req, res) => {
   res.send('Server is running on http://localhost:' + port);
