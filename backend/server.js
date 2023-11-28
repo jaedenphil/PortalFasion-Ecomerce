@@ -19,6 +19,17 @@ app.use(express.static('public'));
 app.get('/', (req, res) => {
   res.send('Server is running on http://localhost:' + port);
 });
+app.use(function (req, res, next) {
+  res.header(
+    'Access-Control-Allow-Origin',
+    'https://portalfashion-frontend.onrender.com'
+  ); // update to match the domain you will make the request from
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 
 // Products route
 app.get('/api/products', (req, res) => {
