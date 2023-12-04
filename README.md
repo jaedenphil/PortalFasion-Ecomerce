@@ -53,18 +53,84 @@ app.listen(port, () => {
 });
 ```
 
-### data.js
+### Data.js
 
-The data.js file contains sample product data used in the project. It exports an array of products with details such as name, image, price, etc.
+The `data.js` file contains sample product data used in the project. It exports an array of products with details such as name, image, price, etc.
 
+```javascript
 // data.js
 // ...
 
 const data = {
-products: [
-// Sample product data
-// ...
-],
+  products: [
+    // Sample product data
+    // ...
+  ],
 };
 
 export default data;
+```
+
+### Package.json
+
+The `package.json` file for the backend specifies the dependencies required, including Express, CORS, dotenv, MongoDB, and Mongoose.
+
+```javascript
+// package.json
+{
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.0.1"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
+```
+
+### Frontend
+
+### Index.js
+
+The `index.js` file sets up the React root and renders the main App component. It also includes Bootstrap CSS for styling.
+
+```javascript
+// index.js
+// ...
+root.render(
+  <React.StrictMode>
+    <StoreProvider>
+      <App />
+    </StoreProvider>
+  </React.StrictMode>
+);
+```
+
+### App.js
+
+The `App.js` file defines the main React component. It includes the navigation, routes, and global state management using the Store context.
+
+```javascript
+// App.js
+// ...
+function App() {
+  // ...
+}
+export default App;
+```
+
+### Store.js
+
+The `Store.js` file sets up the global state using React's context API and provides a StoreProvider component for wrapping the entire application.
+
+```javascript
+// Store.js
+// ...
+export function StoreProvider(props) {
+  // ...
+}
+```
