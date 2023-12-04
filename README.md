@@ -1,11 +1,54 @@
-# Ecommerce Website
+# PortalFashion - Full Stack Ecommerce Website
 
-# this website will aim to sell product clothing to customers
+PortalFashion is a Full Stack Ecommerce Website built with MongoDB, Mongoose, Bootstrap CSS, and deployed on Render.com.
 
-# Update 1 : added 4 new products for the featued products section on the home page, added images for the products, added react-router-dom to and routes to code. made homescreen into route. added css to display all featured products in center and with a border
+## Table of Contents
 
-# node server has been created along with backend folder, can now fetch product data in frontend from backend.
+- [Project Overview](#project-overview)
+- [Backend](#backend)
+  - [Server.js](#serverjs)
+  - [data.js](#datajs)
+  - [package.json](#packagejson)
+- [Frontend](#frontend)
+  - [index.js](#indexjs)
+  - [App.js](#appjs)
+  - [Store.js](#storejs)
+  - [HomeScreen.js](#homescreenjs)
+  - [ProductScreen.js](#productscreenjs)
+  - [SignInScreen.js](#signinscreenjs)
+  - [CartScreen.js](#cartscreenjs)
+- [Components](#components)
+  - [Product.js](#productjs)
+  - [Rating.js](#ratingjs)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Contributing](#contributing)
+- [License](#license)
 
-# bootstrap update: added react bootstrap package and react-router-bootstrap package. changed header to use Navbar from react bootstrap. changed index.css: deleted all style from header and main then replaced .site-container setting min-height to 100vh making a full height screen. then set flex to 1 in css for main. imported bootstrap css from bootstrap Finally removed use-reducer-logger as it was incompatible with react-bootstrap
+## Project Overview
 
-# used react's context api to create a centralized state management system for the app. the state is controlled by a reducer function, and a provider component wraps the application, giving access to the shared state. implemented a straightforward click handler for adding items to the shopping cart
+PortalFashion is a full-fledged Ecommerce website that allows users to browse through various products, view product details, add items to the shopping cart, and proceed to checkout. The project uses MongoDB for data storage, Mongoose as the ODM, Bootstrap CSS for styling, and is deployed on Render.com.
+
+## Backend
+
+### Server.js
+
+The `Server.js` file is the main server file for the backend. It sets up an Express server, connects to MongoDB using Mongoose, and defines routes for serving product data. CORS is configured to allow requests from the frontend hosted on Render.com.
+
+```javascript
+// Server.js
+// ...
+
+// Products route
+app.get('/api/products', (req, res) => {
+  res.json(data.products);
+});
+
+// ...
+
+// Start the server
+app.listen(port, () => {
+  console.log('Server is running on http://localhost:' + port);
+});
+```
