@@ -52,3 +52,19 @@ app.listen(port, () => {
   console.log('Server is running on http://localhost:' + port);
 });
 ```
+
+### data.js
+
+The data.js file contains sample product data used in the project. It exports an array of products with details such as name, image, price, etc.
+
+// data.js
+// ...
+
+const data = {
+products: [
+// Sample product data
+// ...
+],
+};
+
+export default data;
