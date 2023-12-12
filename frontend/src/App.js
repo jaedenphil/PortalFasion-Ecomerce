@@ -12,7 +12,24 @@ import CartScreen from './screens/CartScreen';
 import SignInScreen from './screens/SignInScreen';
 function App() {
   const { state } = useContext(Store);
-  const { cart } = state;
+  const { cart, userInfo } = state;
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/api/logout', {
+        method: 'GET',
+      });
+
+      if (response.ok) {
+        // Update the user state to reflect that the user is logged out
+        dispatch({ type: 'LOGOUT' });
+      } else {
+        // Handle logout failure
+        console.error('Logout failed');
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+  };
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
@@ -23,6 +40,18 @@ function App() {
                 <Navbar.Brand>PortalFashion</Navbar.Brand>
               </LinkContainer>
               <Nav className="me-auto">
+                {userInfo ? (
+                  <Nav.Link
+                    onClick={handleLogout}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    Logout
+                  </Nav.Link>
+                ) : (
+                  <Nav.Link as={Link} to="/signin">
+                    Sign In
+                  </Nav.Link>
+                )}
                 <Link to="/cart" className="nav-link">
                   Cart
                   {cart.cartItems.length > 0 && (

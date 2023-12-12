@@ -1,4 +1,15 @@
+import bcrypt from 'bcryptjs';
+import User from './usermodel';
+
 const data = {
+  users: [
+    {
+      _id: '1',
+      username: 'jaeden',
+      email: 'jaeden@hotmail.com',
+      password: '12345',
+    },
+  ],
   products: [
     {
       _id: '1',
@@ -53,6 +64,23 @@ const data = {
       description: 'Shanks Embroidarded T-Shirts: Red',
     },
   ],
+};
+export const seedUsers = async () => {
+  try {
+    // Hash passwords before creating users
+    const hashedPassword = await bcrypt.hash('12345', 10);
+
+    // Create a new user using the User model
+    await User.create({
+      username: 'jaeden',
+      email: 'jaeden@hotmail.com',
+      password: hashedPassword,
+    });
+
+    console.log('Users seeded successfully');
+  } catch (error) {
+    console.error('Error seeding users:', error);
+  }
 };
 
 export default data;
