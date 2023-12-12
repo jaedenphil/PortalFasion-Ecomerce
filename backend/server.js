@@ -26,7 +26,7 @@ app.set('view engine', 'ejs');
 console.log(process.env.SECRET);
 app.use(
   session({
-    secret: 'portalfashionSecret',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false },
