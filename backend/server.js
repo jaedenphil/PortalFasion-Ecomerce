@@ -1,5 +1,3 @@
-import dotenv from 'dotenv';
-
 import express from 'express';
 import data from './data.js';
 import mongoose from 'mongoose';
