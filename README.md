@@ -1,11 +1,17 @@
 # Ecommerce Website
 
-# this website will aim to sell product clothing to customers
+this program uses node.js,express.js, mongodb, mongoose, render.com along with bootstrap css to make a clothing shop with a add to cart function
 
-# Update 1 : added 4 new products for the featued products section on the home page, added images for the products, added react-router-dom to and routes to code. made homescreen into route. added css to display all featured products in center and with a border
+# Startup
 
-# node server has been created along with backend folder, can now fetch product data in frontend from backend.
+# localhost:
 
-# bootstrap update: added react bootstrap package and react-router-bootstrap package. changed header to use Navbar from react bootstrap. changed index.css: deleted all style from header and main then replaced .site-container setting min-height to 100vh making a full height screen. then set flex to 1 in css for main. imported bootstrap css from bootstrap Finally removed use-reducer-logger as it was incompatible with react-bootstrap
+cd backend
+node server.js
 
-# used react's context api to create a centralized state management system for the app. the state is controlled by a reducer function, and a provider component wraps the application, giving access to the shared state. implemented a straightforward click handler for adding items to the shopping cart
+cd frontend
+npm start
+
+# Render.com
+
+https://portalfashion-frontend.onrender.com
