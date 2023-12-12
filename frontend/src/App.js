@@ -12,7 +12,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useContext } from 'react';
 import { Store } from './Store';
 import CartScreen from './screens/CartScreen';
-import SignInScreen from './screens/SigninScreen';
+import SignInScreen from './screens/SignInScreen';
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
