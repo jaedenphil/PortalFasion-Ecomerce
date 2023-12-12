@@ -24,14 +24,11 @@ export default function SigninScreen() {
 
       if (response.data.success) {
         console.log('Login successful', response.data.user);
-        // Handle successful login (redirect, update UI, etc.)
       } else {
         console.log('Login failed');
-        setError('Incorrect email or password');
       }
     } catch (error) {
       console.error('Error during login:', error);
-      setError('An error occurred during login');
     }
   };
   return (
@@ -62,7 +59,7 @@ export default function SigninScreen() {
         </div>
         <div className="mb-3">
           New customer?{' '}
-          <Link to={`/register?redirect=${redirect}`}>Create your account</Link>
+          <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
         </div>
       </Form>
     </Container>
