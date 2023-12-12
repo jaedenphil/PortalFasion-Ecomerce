@@ -7,7 +7,6 @@ import { Helmet } from 'react-helmet-async';
 import { useContext, useEffect, useState } from 'react';
 import { Store } from '../Store';
 import { toast } from 'react-toastify';
-import { getError } from '../../backend/utils.js';
 
 export default function SignInScreen() {
   const navigate = useNavigate();
@@ -20,18 +19,23 @@ export default function SignInScreen() {
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await Axios.post('/api/users/signin', {
-        email,
-        password,
-      });
+      const { data } = await Axios.post(
+        'https://portalfashion-backend.onrender.com/api/users/signin',
+        {
+          email,
+          password,
+        }
+      );
+
       ctxDispatch({ type: 'USER_SIGNIN', payload: data });
       localStorage.setItem('userInfo', JSON.stringify(data));
       navigate(redirect || '/');
     } catch (err) {
-      toast.error(getError(err));
+      toast.error('invaild email or password');
     }
   };
 
