@@ -2,6 +2,11 @@ import express from 'express';
 import data from './data.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
+import bcrypt from 'bcryptjs';
+import session from 'express-session';
+
 dotenv.config();
 
 mongoose
@@ -18,7 +23,6 @@ const port = 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine', 'ejs');
-app.use(methodOverride('_method'));
 console.log(process.env.SECRET);
 app.use(
   session({
@@ -89,20 +93,11 @@ app.post('/register', async (req, res) => {
 });
 
 // Login Route
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-
 app.post(
-  '/login',
-  passport.authenticate('local', {
-    failureRedirect: '/login',
-    failureMessage: true,
-    successMessage: true,
-  }),
+  '/api/login',
+  passport.authenticate('local', { failureMessage: true }),
   (req, res) => {
-    console.log(req.user);
-    res.redirect('/');
+    res.json({ success: true, user: req.user });
   }
 );
 
