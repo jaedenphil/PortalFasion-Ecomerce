@@ -1,4 +1,5 @@
 import express from 'express';
+import data from './data.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import passport from 'passport';
@@ -9,24 +10,20 @@ import session from 'express-session';
 dotenv.config();
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGODB_URI)
   .then(() => {
-    console.log('Connected to MongoDB');
+    console.log('Connected to MongoDb');
   })
   .catch((err) => {
     console.log(err.message);
   });
-
 const app = express();
-const port = process.env.PORT || 3001;
+const port = 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set('view engine', 'ejs');
-
+console.log(process.env.SECRET);
 app.use(
   session({
     secret: 'portalfashionSecret',
@@ -38,14 +35,14 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+// Define User model
 const userSchema = new mongoose.Schema({
   username: String,
   password: String,
 });
-
 const User = mongoose.model('User', userSchema);
 
+// Passport Configuration
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
@@ -75,23 +72,7 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-// Define Product model data
-const productSchema = new mongoose.Schema({
-  _id: String,
-  name: String,
-  slug: String,
-  category: String,
-  image: String,
-  price: Number,
-  countInStock: Number,
-  brand: String,
-  rating: Number,
-  numReviews: Number,
-  description: String,
-});
-
-const Product = mongoose.model('Product', productSchema);
-
+// Registration Route
 app.get('/register', (req, res) => {
   res.render('register');
 });
@@ -111,6 +92,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
+// Login Route
 app.post(
   '/api/login',
   passport.authenticate('local', { failureMessage: true }),
@@ -119,6 +101,7 @@ app.post(
   }
 );
 
+// Logout Route
 app.get('/logout', (req, res) => {
   req.logout(function (err) {
     if (err) {
@@ -129,12 +112,15 @@ app.get('/logout', (req, res) => {
 });
 
 app.use(express.static('public'));
-
+// Root route
+app.get('/', (req, res) => {
+  res.send('Server is running on http://localhost:' + port);
+});
 app.use(function (req, res, next) {
   res.header(
     'Access-Control-Allow-Origin',
     'https://portalfashion-frontend.onrender.com'
-  );
+  ); // update to match the domain you will make the request from
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
@@ -143,48 +129,28 @@ app.use(function (req, res, next) {
 });
 
 // Products route
-app.get('/api/products', async (req, res) => {
-  try {
-    const products = await Product.find({});
-    res.json(products);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+app.get('/api/products', (req, res) => {
+  res.json(data.products);
+});
+
+app.get('/api/products/slug/:slug', (req, res) => {
+  const product = data.products.find((x) => x.slug === req.params.slug);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).json({ message: 'Product Not Found' });
+  }
+});
+app.get('/api/products/:_id', (req, res) => {
+  const product = data.products.find((x) => x._id === req.params._id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found' });
   }
 });
 
-app.get('/api/products/slug/:slug', async (req, res) => {
-  try {
-    const product = await Product.findOne({ slug: req.params.slug });
-    if (product) {
-      res.send(product);
-    } else {
-      res.status(404).json({ message: 'Product Not Found' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
-
-app.get('/api/products/:_id', async (req, res) => {
-  try {
-    const product = await Product.findById(req.params._id);
-    if (product) {
-      res.send(product);
-    } else {
-      res.status(404).json({ message: 'Product Not Found' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-});
-
-app.get('/', (req, res) => {
-  res.send('Server is running on http://localhost:' + port);
-});
-
+// Start the server
 app.listen(port, () => {
   console.log('Server is running on http://localhost:' + port);
 });
